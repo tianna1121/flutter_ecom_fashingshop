@@ -81,7 +81,25 @@ class _ProductDetailsState extends State<ProductDetails> {
             children: <Widget>[
               Expanded(
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text('Size'),
+                          content: Text('Choose the size'),
+                          actions: <Widget>[
+                            MaterialButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('Close'),
+                            )
+                          ],
+                        );
+                      },
+                    );
+                  },
                   color: Colors.white,
                   textColor: Colors.grey,
                   child: Row(
@@ -98,7 +116,25 @@ class _ProductDetailsState extends State<ProductDetails> {
               ),
               Expanded(
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text('Color'),
+                          content: Text('Choose the Color'),
+                          actions: <Widget>[
+                            MaterialButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('Close'),
+                            )
+                          ],
+                        );
+                      },
+                    );
+                  },
                   color: Colors.white,
                   textColor: Colors.grey,
                   child: Row(
@@ -115,7 +151,25 @@ class _ProductDetailsState extends State<ProductDetails> {
               ),
               Expanded(
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text('Quantity'),
+                          content: Text('Choose the quantity'),
+                          actions: <Widget>[
+                            MaterialButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('Close'),
+                            )
+                          ],
+                        );
+                      },
+                    );
+                  },
                   color: Colors.white,
                   textColor: Colors.grey,
                   child: Row(
@@ -158,7 +212,61 @@ class _ProductDetailsState extends State<ProductDetails> {
                 onPressed: () {},
               ),
             ],
-          )
+          ),
+          Divider(),
+          ListTile(
+            title: Text('Product Details'),
+            subtitle: Text(
+                'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'),
+          ),
+          Divider(),
+          Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(12.0, 5.0, 5.0, 5.0),
+                child: Text(
+                  'Product name',
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text(widget.product_detail_name),
+              ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(12.0, 5.0, 5.0, 5.0),
+                child: Text(
+                  'Product brand',
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                // * TODO: CREATE PRODUCT BAND
+                child: Text('Brand X'),
+              ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(12.0, 5.0, 5.0, 5.0),
+                child: Text(
+                  'Product condition',
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                // * TODO: CREATE PRODUCT BAND
+                child: Text('New'),
+              ),
+            ],
+          ),
         ],
       ),
     );
