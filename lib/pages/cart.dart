@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../main.dart';
+import '../components/cart_products.dart';
 
 class Cart extends StatefulWidget {
   @override
@@ -32,6 +33,7 @@ class _CartState extends State<Cart> {
           ),
         ],
       ),
+      body: CartProducts(),
       bottomNavigationBar: Container(
         color: Colors.white,
         child: Row(
