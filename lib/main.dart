@@ -36,6 +36,7 @@ class _HomePageState extends State<HomePage> {
         ],
         autoplay: false,
         dotSize: 4.0,
+        dotBgColor: Colors.transparent,
         indicatorBgPadding: 2.0,
         animationCurve: Curves.fastLinearToSlowEaseIn,
         animationDuration: Duration(milliseconds: 1000),
@@ -81,7 +82,7 @@ class _HomePageState extends State<HomePage> {
               onTap: () {},
               child: ListTile(
                 title: Text('HomePage'),
-                leading: Icon(Icons.home),
+                leading: Icon(Icons.home, color: Colors.red),
               ),
             ),
 
@@ -89,7 +90,7 @@ class _HomePageState extends State<HomePage> {
               onTap: () {},
               child: ListTile(
                 title: Text('My Account'),
-                leading: Icon(Icons.person),
+                leading: Icon(Icons.person, color: Colors.red),
               ),
             ),
 
@@ -97,22 +98,25 @@ class _HomePageState extends State<HomePage> {
               onTap: () {},
               child: ListTile(
                 title: Text('My Orders'),
-                leading: Icon(Icons.shopping_basket),
+                leading: Icon(Icons.shopping_basket, color: Colors.red),
               ),
             ),
 
             InkWell(
               onTap: () {},
               child: ListTile(
-                title: Text('Categories'),
-                leading: Icon(Icons.dashboard),
+                title: Text('Shopping cart'),
+                leading: Icon(
+                  Icons.shopping_cart,
+                  color: Colors.red,
+                ),
               ),
             ),
             InkWell(
               onTap: () {},
               child: ListTile(
                 title: Text('Favorite'),
-                leading: Icon(Icons.favorite),
+                leading: Icon(Icons.favorite, color: Colors.red),
               ),
             ),
             Divider(),

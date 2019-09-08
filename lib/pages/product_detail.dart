@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecomm/main.dart';
 
 class ProductDetails extends StatefulWidget {
   final product_detail_name;
@@ -25,7 +26,13 @@ class _ProductDetailsState extends State<ProductDetails> {
       appBar: AppBar(
         elevation: 0.1,
         backgroundColor: Colors.red,
-        title: Text('ShopApp'),
+        title: InkWell(
+          child: Text('FashApp'),
+          onTap: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => HomePage()));
+          },
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.search, color: Colors.white),
@@ -267,7 +274,131 @@ class _ProductDetailsState extends State<ProductDetails> {
               ),
             ],
           ),
+
+          Divider(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Similar products',
+            ),
+          ),
+          // * Simiar production section
+          Container(
+            height: 360.0,
+            child: SimilarProducts(),
+          ),
         ],
+      ),
+    );
+  }
+}
+
+class SimilarProducts extends StatefulWidget {
+  @override
+  _SimilarProductsState createState() => _SimilarProductsState();
+}
+
+class _SimilarProductsState extends State<SimilarProducts> {
+  var similar_product_list = [
+    {
+      "name": "Blazer",
+      "picture": "assets/images/products/blazer1.jpeg",
+      "old_price": 120,
+      "price": 85,
+    },
+    {
+      "name": "Red dress",
+      "picture": "assets/images/products/dress1.jpeg",
+      "old_price": 100,
+      "price": 50,
+    },
+    {
+      "name": "Red dress",
+      "picture": "assets/images/products/skt2.jpeg",
+      "old_price": 100,
+      "price": 50,
+    },
+    {
+      "name": "Red dress",
+      "picture": "assets/images/products/dress2.jpeg",
+      "old_price": 100,
+      "price": 50,
+    },
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      itemCount: similar_product_list.length,
+      itemBuilder: ((context, index) {
+        return Similar_single_prod(
+          prod_name: similar_product_list[index]['name'],
+          prod_picture: similar_product_list[index]['picture'],
+          prod_old_price: similar_product_list[index]['old_price'],
+          prod_price: similar_product_list[index]['price'],
+        );
+      }),
+    );
+  }
+}
+
+class Similar_single_prod extends StatelessWidget {
+  final prod_name;
+  final prod_picture;
+  final prod_old_price;
+  final prod_price;
+
+  const Similar_single_prod(
+      {Key key,
+      this.prod_name,
+      this.prod_picture,
+      this.prod_old_price,
+      this.prod_price})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Hero(
+        tag: Text('Hero 1'),
+        child: Material(
+          child: InkWell(
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                // * Passing the values of the product to the product details page
+                builder: (context) => ProductDetails(
+                      product_detail_name: prod_name,
+                      product_detail_old_price: prod_old_price,
+                      product_detail_picture: prod_picture,
+                      product_detail_price: prod_price,
+                    ))),
+            child: GridTile(
+              footer: Container(
+                  color: Colors.white70,
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Text(
+                          prod_name,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16.0),
+                        ),
+                      ),
+                      Text(
+                        '\$${prod_price}',
+                        style: TextStyle(
+                            color: Colors.red, fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  )),
+              child: Image.asset(
+                prod_picture,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
