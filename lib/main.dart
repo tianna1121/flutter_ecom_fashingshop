@@ -157,20 +157,23 @@ class _HomePageState extends State<HomePage> {
 
           // * Padding & Text
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text('Categories'),
+            padding: const EdgeInsets.all(4.0),
+            child: Container(
+                alignment: Alignment.centerLeft, child: Text('Categories')),
           ),
           // * Horizontal list view begins here
           HorizontalList(),
 
           // * Padding & Text
           Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Text('Recent products'),
+            padding: const EdgeInsets.all(4.0),
+            child: Container(
+                alignment: Alignment.centerLeft,
+                child: Text('Recent products')),
           ),
 
           // * Products
-          Container(height: 320.0, child: Products())
+          Flexible(child: Products())
         ],
       ),
     );
