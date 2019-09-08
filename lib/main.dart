@@ -5,6 +5,7 @@ import 'package:carousel_pro/carousel_pro.dart';
 // * My own imports
 import 'components/horizontal_listview.dart';
 import 'components/products.dart';
+import 'pages/cart.dart';
 
 void main() => runApp(MyApp());
 
@@ -55,7 +56,10 @@ class _HomePageState extends State<HomePage> {
           ),
           IconButton(
             icon: Icon(Icons.shopping_cart, color: Colors.white),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Cart()));
+            },
           ),
         ],
       ),
@@ -103,7 +107,10 @@ class _HomePageState extends State<HomePage> {
             ),
 
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Cart()));
+              },
               child: ListTile(
                 title: Text('Shopping cart'),
                 leading: Icon(
