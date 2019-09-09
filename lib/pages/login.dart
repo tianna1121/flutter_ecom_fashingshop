@@ -45,45 +45,39 @@ class _LoginState extends State<Login> {
     // final FirebaseUser firebaseUser =
     //     (await firebaseAuth.signInWithCredential(credential)) as FirebaseUser;
     AuthResult res = await firebaseAuth.signInWithCredential(credential);
-    if (res.user == null) print("+++++++++++++++++++++++++++Failed");
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => HomePage()));
-
-    // if (firebaseUser != null) {
-    //   final QuerySnapshot result = await Firestore.instance
-    //       .collection("users")
-    //       .where("id", isEqualTo: firebaseUser.uid)
-    //       .getDocuments();
-    //   final List<DocumentSnapshot> documents = result.documents;
-    //   if (documents.length == 0) {
-    //     print("docs length equals to 0");
-    //     // * insert the new user to our collection
-    //     Firestore.instance
-    //         .collection("users")
-    //         .document(firebaseUser.uid)
-    //         .setData({
-    //       "id": firebaseUser.uid,
-    //       "username": firebaseUser.displayName,
-    //       "profilePicture": firebaseUser.photoUrl
-    //     });
-    //     await preferences.setString("id", firebaseUser.uid);
-    //     await preferences.setString("username", firebaseUser.displayName);
-    //     await preferences.setString("photoUrl", firebaseUser.photoUrl);
-    //   } else {
-    //     print("docs length NOT equals to 0");
-    //     await preferences.setString("id", documents[0]["id"]);
-    //     await preferences.setString("username", documents[0]["username"]);
-    //     await preferences.setString("photoUrl", documents[0]["photoUrl"]);
-    //   }
-    //   Fluttertoast.showToast(msg: "Login was successful");
-    //   setState(() {
-    //     loading = false;
-    //   });
-    //   Navigator.pushReplacement(
-    //       context, MaterialPageRoute(builder: (context) => HomePage()));
-    // } else {
-    //   Fluttertoast.showToast(msg: "Login failed :(");
-    // }
+    if (res.user == null) {
+      print("+++++++++++++++++++++++++++Failed");
+      Fluttertoast.showToast(msg: "Login failed :(");
+    } else {
+      final QuerySnapshot result = await Firestore.instance
+          .collection("users")
+          .where("id", isEqualTo: res.user.uid)
+          .getDocuments();
+      final List<DocumentSnapshot> documents = result.documents;
+      if (documents.length == 0) {
+        print("docs length equals to 0");
+        // * insert the new user to our collection
+        Firestore.instance.collection("users").document(res.user.uid).setData({
+          "id": res.user.uid,
+          "username": res.user.displayName,
+          "profilePicture": res.user.photoUrl
+        });
+        await preferences.setString("id", res.user.uid);
+        await preferences.setString("username", res.user.displayName);
+        await preferences.setString("photoUrl", res.user.photoUrl);
+      } else {
+        print("docs length NOT equals to 0");
+        await preferences.setString("id", documents[0]["id"]);
+        await preferences.setString("username", documents[0]["username"]);
+        await preferences.setString("photoUrl", documents[0]["photoUrl"]);
+      }
+      Fluttertoast.showToast(msg: "Login was successful");
+      setState(() {
+        loading = false;
+      });
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
+    }
   }
 
   @override
