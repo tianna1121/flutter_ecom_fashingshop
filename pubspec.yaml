@@ -29,6 +29,7 @@ dependencies:
   google_sign_in:
   shared_preferences:
   fluttertoast:
+  firebase_database:
 
 dev_dependencies:
   flutter_test:
@@ -49,6 +50,7 @@ flutter:
     - assets/images/
     - assets/images/cats/
     - assets/images/products/
+    - assets/images/logo.svg
   #  - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

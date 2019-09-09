@@ -6,6 +6,9 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: Login());
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(primaryColor: Colors.red.shade900),
+        home: Login());
   }
 }
