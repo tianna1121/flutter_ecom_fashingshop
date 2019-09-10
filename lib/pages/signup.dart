@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ecomm/pages/home.dart';
+import '../db/users.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -18,6 +20,7 @@ class _SignUpState extends State<SignUp> {
   bool hidepass = true;
   String gender;
   String groupvalue = "male";
+  UserServices _userServices = UserServices();
 
   @override
   Widget build(BuildContext context) {
@@ -239,7 +242,7 @@ class _SignUpState extends State<SignUp> {
                         color: Colors.blue,
                         elevation: 0.0,
                         child: MaterialButton(
-                          onPressed: () {
+                          onPressed: () async {
                             validateForm();
                           },
                           minWidth: MediaQuery.of(context).size.width,
@@ -332,14 +335,28 @@ class _SignUpState extends State<SignUp> {
     });
   }
 
-  void validateForm() async {
+  Future validateForm() async {
     FormState formState = _formKey.currentState;
+
     if (formState.validate()) {
+      formState.reset();
       FirebaseUser user = await firebaseAuth.currentUser();
       if (user == null) {
-        firebaseAuth.createUserWithEmailAndPassword(
-            email: _emailTextController.text,
-            password: _passwordTextController.text);
+        firebaseAuth
+            .createUserWithEmailAndPassword(
+                email: _emailTextController.text,
+                password: _passwordTextController.text)
+            .then((user) => {
+                  _userServices.createUser({
+                    "username": _nameTextController.text,
+                    "email": _emailTextController.text,
+                    //      "userId": user.uid,
+                    "gender": gender,
+                  })
+                })
+            .catchError((err) => {print(err.toString())});
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
       }
     }
   }

@@ -274,6 +274,14 @@ class _LoginState extends State<Login> {
       loading = true;
     });
 
+    FirebaseUser user = await firebaseAuth.currentUser().then((user) {
+      if (user != null) {
+        setState(() {
+          isLogedin = true;
+        });
+      }
+    });
+
     preferences = await SharedPreferences.getInstance();
     isLogedin = await googleSignIn.isSignedIn();
     if (isLogedin) {
